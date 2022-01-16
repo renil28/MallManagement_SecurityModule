@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+
+table {
+  width: 50%;
+  margin-left: 15px;
+}
+th, td {
+  text-align: left;
+  padding-left: 8px;
+}
+th {
+  background-color: #cc4e4e;
+  color: white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+h2{
+    margin-left: 15px;
+}
+.button{
+    margin-left: 15px;
+}
+.newbutton{
+    margin-left: 15px;
+    display: inline-block;
+}
+.delbutton{
+    padding: 8px;
+    display: inline-block;
+}
+</style>
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="mystyle.css">
+  <link rel="stylesheet" href="animation.css">
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="home.html">FORENZA</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="home.html">HOME</a></li>
+        <li><a href="#NEWS">NEWS</a></li>
+        <li><a href="contactuspage.html">CONTACT</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">SERVICES</a></li>
+            <li><a href="aboutus.html">ABOUT US</a></li>
+            <li><a href="#">RECRUITEMENT DRIVE</a></li> 
+          </ul>
+        </li>
+        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Container (Dashboard Section) -->
+<br>
+<br>
+<br>
+<h2>Security Personnel Details</h2>
+
+<div class ="button">
+    <button type="button" onclick="loadXMLDoc()">Show Employees</button>
+</div>
+<br>
+<br>
+<br>
+<table id="demo" border="2">
+    <tr><th>Name</th><th>Age</th><th>Salary</th></tr>
+</table>
+<br>
+<div class="newbutton">
+    <button type="button" onclick="CreateNew()">Create New</button>
+</div>
+<div class="delbutton">
+    <button type="button" onclick="DeleteAll()">Delete All</button>
+</div>
+<div class="delbutton">
+    <button type="button" onclick="Delete()">Delete</button>
+</div>
+
+
+<script>
+
+function loadXMLDoc() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      myFunction(this);
+    }
+  };
+  xmlhttp.open("GET", "security.xml" , true);
+  xmlhttp.send();
+}
+
+function myFunction(xml) {
+  var x, i, xmlDoc, table;
+  xmlDoc = xml.responseXML;
+  table = "<tr><th>Name</th><th>Age</th><th>Salary</th></tr>";
+  x = xmlDoc.getElementsByTagName("SecurityPersonnel")
+  for (i = 0; i < x.length; i++) { 
+    table += "<tr><td>" + 
+    x[i].getElementsByTagName("Name")[0].childNodes[0].nodeValue +
+    "</td><td>" +
+    x[i].getElementsByTagName("Age")[0].childNodes[0].nodeValue +
+    "</td><td>" +
+    x[i].getElementsByTagName("Salary")[0].childNodes[0].nodeValue +
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+function DeleteAll()
+{
+    myFunction(xml);
+    y=xmlDoc.getElementsByTagName("SecurityPersonnel")[0];
+    xmlDoc.documentElement.removeChild(y);
+    
+}
+</script>
+
+
+
+<!-- Footer -->
+<footer class="text-center">
+  <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a><br><br>
+  <p>Follow us at</p>
+  <a href="#" class="fa fa-facebook"></a>
+  <a href="#" class="fa fa-twitter"></a>
+  <a href="#" class="fa fa-google"></a>
+  <a href="#" class="fa fa-linkedin"></a>
+  <a href="#" class="fa fa-youtube"></a>
+  <a href="#" class="fa fa-instagram"></a> 
+</footer>
+
+<script>
+$(document).ready(function(){
+  // Initialize Tooltip
+  $('[data-toggle="tooltip"]').tooltip(); 
+  
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+})
+</script>
+
+</body>
+</html>
