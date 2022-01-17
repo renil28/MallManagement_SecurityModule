@@ -92,13 +92,13 @@ h2{
 </table>
 <br>
 <div class="newbutton">
-    <button type="button" onclick="CreateNew()">Create New</button>
+    <button type="button" onclick="myFunction(xmlDoc,'create')">Create New</button>
 </div>
 <div class="delbutton">
-    <button type="button" onclick="DeleteAll()">Delete All</button>
+    <button type="button" onclick="myFunction(xmlDoc,'edit')">Edit Data</button>
 </div>
 <div class="delbutton">
-    <button type="button" onclick="Delete()">Delete</button>
+    <button type="button" onclick="myFunction(xmlDoc,'delete')">Delete</button>
 </div>
 
 
@@ -108,16 +108,64 @@ function loadXMLDoc() {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      myFunction(this);
+      xmlDoc = this.responseXML;
+      myFunction();
     }
   };
   xmlhttp.open("GET", "security.xml" , true);
   xmlhttp.send();
 }
 
-function myFunction(xml) {
-  var x, i, xmlDoc, table;
-  xmlDoc = xml.responseXML;
+function myFunction(xml,func) {
+
+  if (func == "delete") {
+  y = xmlDoc.getElementsByTagName('SecurityPersonnel')[0];
+  xmlDoc.documentElement.removeChild(y);
+  alert('The Element has been removed!');
+  }
+
+  if (func == "create") {
+   a = prompt("Enter Security Name");
+   b = prompt("Enter Security Age");
+   c = prompt("Enter Security Salary");
+
+
+
+   var i
+   var details = []
+   Security = xmlDoc.createElement("SecurityPersonnel")
+   details[0] = xmlDoc.createElement("Name");
+   details[0].appendChild(xmlDoc.createTextNode(a))
+   Security.appendChild(details[0])
+   details[1] = xmlDoc.createElement("Age")
+   details[1].appendChild(xmlDoc.createTextNode(b))
+   Security.appendChild(details[1])
+   details[2] = xmlDoc.createElement("Salary")
+   details[2].appendChild(xmlDoc.createTextNode(c))
+   Security.appendChild(details[2])
+
+  xmlDoc.documentElement.appendChild(Security);
+  }
+            
+  if (func == "edit") {
+   i = parseInt(prompt("Enter index to change")) - 1;
+   a = prompt("Enter Security Name");
+   b = prompt("Enter Security Age");
+   c = prompt("Enter Security Salary");
+  
+   xmlDoc.getElementsByTagName("SecurityPersonnel")
+   [i].getElementsByTagName("Name")[0].firstChild.nodeValue = a
+
+   xmlDoc.getElementsByTagName("SecurityPersonnel")
+   [i].getElementsByTagName("Age")[0].firstChild.nodeValue = b
+
+   xmlDoc.getElementsByTagName("SecurityPersonnel")
+   [i].getElementsByTagName("Salary")[0].firstChild.nodeValue = c
+
+  }
+  
+  var x, i, table;
+  //xmlDoc = xml.responseXML;
   table = "<tr><th>Name</th><th>Age</th><th>Salary</th></tr>";
   x = xmlDoc.getElementsByTagName("SecurityPersonnel")
   for (i = 0; i < x.length; i++) { 
@@ -132,13 +180,6 @@ function myFunction(xml) {
   document.getElementById("demo").innerHTML = table;
 }
 
-function DeleteAll()
-{
-    myFunction(xml);
-    y=xmlDoc.getElementsByTagName("SecurityPersonnel")[0];
-    xmlDoc.documentElement.removeChild(y);
-    
-}
 </script>
 
 
