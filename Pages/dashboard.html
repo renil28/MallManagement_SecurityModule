@@ -101,7 +101,6 @@ h2{
     <button type="button" onclick="myFunction(xmlDoc,'delete')">Delete</button>
 </div>
 
-
 <script>
 
 function loadXMLDoc() {
@@ -119,9 +118,10 @@ function loadXMLDoc() {
 function myFunction(xml,func) {
 
   if (func == "delete") {
-  y = xmlDoc.getElementsByTagName('SecurityPersonnel')[0];
+  i = parseInt(prompt("Select the Table row number")) - 1;
+  y = xmlDoc.getElementsByTagName('SecurityPersonnel')[i];
   xmlDoc.documentElement.removeChild(y);
-  alert('The Element has been removed!');
+  alert('Deleted Successfully!');
   }
 
   if (func == "create") {
