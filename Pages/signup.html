@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    section{
+        width: 500px;
+        height: 1700px;
+        margin: 150px auto;
+    }
+    label{
+        display: block;
+        padding:1px;
+        font-size: 15px;
+    }
+    input{
+        width: 100%;
+        padding: 10px;
+        border: 1px red;
+        margin-left: 20px;
+        border-radius: 3px;
+    }
+    section button{
+        display: inline;
+        padding: 5px 50px;
+        margin-left: 160px;
+        background-color: #db1923;
+        color: rgb(204, 194, 194);
+    }
+    section button:hover {
+        background-color: #c7526c; 
+        color: white;
+    }
+    section p{
+        margin-left: 10px;
+    }
+    section h2{
+        margin-left: 100px;
+    }
+    section div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+</style>
+
+
+<head>
+  <title>Sign Up Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="mystyle.css">
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="home.html">FORENZA</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="home.html">HOME</a></li>
+        <li><a href="#NEWS">NEWS</a></li>
+        <li><a href="contactuspage.html">CONTACT</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">SERVICES</a></li>
+            <li><a href="aboutus.html">ABOUT US</a></li>
+            <li><a href="#">RECRUITEMENT DRIVE</a></li> 
+          </ul>
+        </li>
+        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Container (Login Section) -->
+<section>
+<h2>Employee Sign Up Page</h2>
+<br>
+<form onsubmit="return validate()" action="contactuspage.html" >
+    <div>
+        <label for="nameemp">Name</label>
+        <input type="text" onkeypress="return (event.charCode > 64 && 
+        event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" id="nameemp" placeholder="Employee-name">
+        <p></p>
+    </div>
+    <div>
+        <label for="nameemptype">Employee Type</label>
+        <input type="text" onkeypress="return (event.charCode > 64 && 
+        event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" id="nameemptype" placeholder="Employee-type">
+        <p></p>
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="MallGivenEmail-id">
+        <p></p>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="MallGivenPassword">
+        <p></p>
+    </div>
+    <div>
+        <label for="id">Mall-ID</label>
+        <input type="number" id="id" placeholder="MallGivenEmployee-ID">
+        <p></p>
+    </div>
+    <div>
+     <label for="number">Phone-Number</label>
+     <input type="number" id="number" placeholder="Phone-Number">
+     <p></p>
+     <br>
+     <button type="submit">Sign Up</button>
+ </div>
+</form>
+</section>
+
+
+<footer class="text-center">
+    <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+      <span class="glyphicon glyphicon-chevron-up"></span>
+    </a><br><br>
+    <p>Follow us at</p>
+    <a href="#" class="fa fa-facebook"></a>
+    <a href="#" class="fa fa-twitter"></a>
+    <a href="#" class="fa fa-google"></a>
+    <a href="#" class="fa fa-linkedin"></a>
+    <a href="#" class="fa fa-youtube"></a>
+    <a href="#" class="fa fa-instagram"></a> 
+  </footer>
+</body>
+</html>
+<script>
+$(document).ready(function(){
+  // Initialize Tooltip
+  $('[data-toggle="tooltip"]').tooltip(); 
+  
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+})
+</script>
+
+<script>
+    var emptype=document.getElementById("nameemptype");
+    var email=document.getElementById('email');
+    var number=document.getElementById('number');
+    var password = document.getElementById('password');
+    var id=document.getElementById('id');
+    var span=document.getElementsByTagName('p');
+
+    emptype.onkeydown = function()
+    {
+       const regextypeemp=/^(security|maintenence|admin|)$/;
+       if(regextypeemp.test(emptype.value))
+       {
+         span[1].innerText="Employee Type Valid";
+         span[1].style.color="lime";  
+       }
+       else{
+           span[1].innerText="Invalid. Select from security/maintenence/admin";
+           span[1].style.color="red";  
+       }
+    }
+    
+    email.onkeydown=function()
+    {
+       const regex1=/^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@forenza.com$/;
+       if(regex1.test(email.value))
+       {
+         span[2].innerText="Your Email is Valid";
+         span[2].style.color="lime";  
+       }
+       else{
+           span[2].innerText="Invalid Email Id";
+           span[2].style.color="red";  
+       }
+    }
+    
+    password.onkeydown = function()
+    {
+      const regexpasswd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/;
+      if(regexpasswd.test(password.value))
+       {
+         span[3].innerText="Your Password is Valid";
+         span[3].style.color="lime";  
+       }
+       else{
+           span[3].innerText="Invalid Password. Make sure your password has at least 1 upper case, numeric, and special character. ";
+           span[3].style.color="red";  
+       }
+    }
+
+    number.onkeydown=function()
+    {
+        const regnum=/^[0-9]{9}$/;
+        if(regnum.test(number.value))
+       {
+         span[5].innerText="Your Number is Valid";
+         span[5].style.color="lime";  
+       }
+       else{
+           span[5].innerText="Invalid Phone Number";
+           span[5].style.color="red";
+       }   
+    }
+
+    id.onkeydown=function()
+    {
+        const regnumm=/^[0-9]{5}$/;
+        if(regnumm.test(id.value))
+       {
+         span[4].innerText="Your ID Number is Valid";
+         span[4].style.color="lime";  
+       }
+       else{
+           span[4].innerText="Invalid ID Number";
+           span[4].style.color="red";
+       }   
+    }
+
+    function validate()
+        {
+           var username=document.getElementById("nameemp");
+           var username=document.getElementById("nameemptype");
+           var password=document.getElementById("password");
+           var email=document.getElementById('email');
+           var email=document.getElementById('id');
+           var number=document.getElementById('number');
+           if(username.value.trim()=="")
+           {
+               alert("Blank Username");
+               username.style.border="solid 3px red";
+               return false;
+           }
+           else if(password.value.trim()=="")
+           {
+               alert("Blank Password");
+               password.style.border="solid 3px red";
+               return false;
+           }
+           else if(password.value.trim().length<5)
+           {
+               alert("Password is too short");
+               password.style.border="solid 3px red";
+               return false;
+           }
+           else if(email.value.trim()=="")
+           {
+               alert("Blank Email");
+                email.style.border="solid 3px red";
+               return false;
+           }
+           else if(number.value.trim()=="")
+           {
+               alert("Blank Phone Number");
+               number.style.border="solid 3px red";
+               return false;
+           }
+           else if(id.value.trim()=="")
+           {
+               alert("Blank ID Number");
+               id.style.border="solid 3px red";
+               return false;
+           }
+           else if(emptype.value.trim()=="")
+           {
+               alert("Blank Employee Type");
+               id.style.border="solid 3px red";
+               return false;
+           }
+           else
+           {
+             return true;
+           }
+        }
+</script>
