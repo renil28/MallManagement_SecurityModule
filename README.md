@@ -3,7 +3,8 @@ This will contain information related to Lab Programs related to Webstack Develo
 Right Now, there are three HTML Pages
 - Home Page
 - About Us Page
-- Contact Page
 - Recruitement Drive Page
+- Login Page
+- Sign Up Page
 
 HTML, Css and Bootstrap involved. Changes will be made soon.
