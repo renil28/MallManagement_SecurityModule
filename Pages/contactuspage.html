@@ -13,6 +13,11 @@ body {
   height: 100vh;
 }
 
+.dark {
+    background-color: black;
+    color: #fff;
+}
+
 a {
   color: #92badd;
   display:inline-block;
@@ -254,11 +259,22 @@ input[type=text]:placeholder {
 *:focus {
     outline: none;
 } 
+
+
+footer button{
+  margin-left: 2px;
+  background-color: #0d0d0d;
+  color: #fff;
+}
+
+footer a{
+  margin-left:15px;
+}
 </style>
 
 
 <head>
-  <title>Home Page</title>
+  <title>Login Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -308,12 +324,12 @@ input[type=text]:placeholder {
     <h1>Employee Login</h1>
 
     <!-- Login Form -->
-    <form>
+    <form name="myform"  action = "">
       <input type="text" id="login" class="fadeIn second" name="login" placeholder="email">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+      <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
     </form>
     <br>
-    <button type="button" onclick="login()">Quick Login</button>
+    <button type="button" onclick="addCookie()">Quick Login</button>
     <br>
     <br>
 
@@ -326,11 +342,9 @@ input[type=text]:placeholder {
 
   </div>
 </div>
-<script>
-       function login() {
-         window.location.href="dashboard.html";
-       }
-     </script>
+
+<h5>Cookies List</h5>
+      <p id="list"></p>
 
 <!-- Footer -->
 <footer class="text-center">
@@ -344,7 +358,98 @@ input[type=text]:placeholder {
   <a href="#" class="fa fa-linkedin"></a>
   <a href="#" class="fa fa-youtube"></a>
   <a href="#" class="fa fa-instagram"></a> 
+  <br>
+  <br>
+  <button type="button" onclick="listCookies()">Check all stored cookies</button>
+  <button type="button" onclick="removeCookies()">Remove all cookies</button>
+  <a id="theme-switcher" class="btn"></a>
+  <br>
+  <p>Number of times website has been visited:</p>
+  <p id="count"></p>
 </footer>
+
+
+
+
+<script type = "text/javascript">
+
+  var num=1;
+      function addCookie() {
+         cookievalue = escape(document.myform.login.value) + ";"
+         cookievalue2 = escape(document.myform.password.value) + ";"
+         document.cookie="Name=" + cookievalue;
+         document.cookie="Password=" + cookievalue2;
+         document.cookie="Login attempts ="+num;
+         num++;
+      }
+      
+      function listCookies() {
+         var result = document.cookie;
+         document.getElementById("list").innerHTML=result;
+      }
+      function removeCookies() {
+         var res = document.cookie;
+         var multiple = res.split(";");
+         for(var i=0;i<multiple.length;i++) {
+            var key = multiple[i].split("=");
+            document.cookie=key[0]+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+         }
+      }
+</script>
+
+<script>
+  clickCounter();
+  
+  function clickCounter() {
+    if (localStorage.clickcount) {
+      localStorage.clickcount = Number(localStorage.clickcount)+1;
+    } else {
+      localStorage.clickcount = 1;
+    }
+    document.getElementById("count").innerHTML = localStorage.clickcount;
+  }
+  </script>
+  
+<script>
+const MOON = '🌙';
+const SUN = '☀️';
+const DARK_MODE = 'dark';
+const LIGHT_MODE = 'light';
+const DEFAULT_MODE = DARK_MODE;
+
+const btn = document.querySelector('#theme-switcher');
+
+init();
+
+function init() {
+    let storedMode = sessionStorage.getItem('mode');
+    if (!storedMode) {
+        storedMode = DEFAULT_MODE;
+        sessionStorage.setItem('mode', DEFAULT_MODE);
+    }
+    setMode(storedMode);
+}
+
+function setMode(mode = DEFAULT_MODE) {
+    if (mode === DARK_MODE) {
+        btn.textContent = SUN;
+        document.body.classList.add(DARK_MODE);
+
+    } else if (mode === LIGHT_MODE) {
+        btn.textContent = MOON;
+        document.body.classList.remove(DARK_MODE);
+    }
+}
+
+btn.addEventListener('click', function () {
+    let mode = sessionStorage.getItem('mode');
+    if (mode) {
+        let newMode = mode == DARK_MODE ? LIGHT_MODE : DARK_MODE;
+        setMode(newMode);
+        sessionStorage.setItem('mode', newMode);
+    }
+});
+</script>
 
 <script>
 $(document).ready(function(){
