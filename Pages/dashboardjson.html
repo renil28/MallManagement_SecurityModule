@@ -45,7 +45,12 @@
     h2{
       margin-left: 15px;
     }
-  
+    p{
+      margin-left: 15px;
+    }
+    input{
+      margin-left: 10px;
+    }
   </style>
 </head>
 
@@ -85,6 +90,7 @@
     <h2>Security Database</h2>
   </div>
   <div ng-controller="testCtrl">
+    <p>Search:<input type="text" ng-model="test"></p>
     <form name="commonForm">
       <table class="table">
         <tr>
@@ -95,7 +101,7 @@
           <th> Phone </th>
           <th> Security Type </th>
         </tr>
-        <tr ng-repeat="employee in userData">
+        <tr ng-repeat="employee in userData | filter : test">
           <td> {{employee.firstName}} {{employee.lastName}}</td>
           <td> {{employee.email}}</td>
           <td> {{employee.dob}}</td>
@@ -106,7 +112,6 @@
       </table>
       <br>
     </form>
-
   </div>
 </body>
 
