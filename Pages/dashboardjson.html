@@ -19,7 +19,12 @@
         };
 
         $http(req).then(function (response) {
-            $scope.userData = response.data.securityemployee;
+            $scope.userData  = response.data.securityemployee;
+            $scope.userData2 = response.data.securityhead;
+            $scope.userData3 = response.data.securityagency;
+            $scope.userData4 = response.data.cctv;
+            $scope.userData5 = response.data.admin;
+            $scope.today = new Date();
         });
       }]);
 
@@ -87,7 +92,7 @@
   <br>
   <br>
   <div>
-    <h2>Security Database</h2>
+    <h2>Security Personnel Database</h2>
   </div>
   <div ng-controller="testCtrl">
     <p>Search:<input type="text" ng-model="test"></p>
@@ -103,8 +108,8 @@
         </tr>
         <tr ng-repeat="employee in userData | filter : test">
           <td> {{employee.firstName}} {{employee.lastName}}</td>
-          <td> {{employee.email}}</td>
-          <td> {{employee.dob}}</td>
+          <td> {{employee.email | lowercase}}</td>
+          <td> {{employee.dob }}</td>
           <td> {{employee.joindate}}</td>
           <td> {{employee.phone}}</td>
           <td> {{employee.type}}</td>
@@ -113,6 +118,111 @@
       <br>
     </form>
   </div>
+
+  <div>
+    <h2>Security Head Database</h2>
+  </div>
+  <div ng-controller="testCtrl">
+    <p>Search:<input type="text" ng-model="test"></p>
+    <form name="commonForm">
+      <table class="table">
+        <tr>
+          <th> Head Name </th>
+          <th> Email </th>
+          <th> Date of Birth </th>
+          <th> Join Date </th>
+          <th> Phone </th>
+          <th> Current Status </th>
+        </tr>
+        <tr ng-repeat="employee in userData2 | filter : test">
+          <td> {{employee.firstName}} {{employee.lastName}}</td>
+          <td> {{employee.email | lowercase}}</td>
+          <td> {{employee.dob}}</td>
+          <td> {{employee.joindate}}</td>
+          <td> {{employee.phone}}</td>
+          <td> {{employee.role}}</td>
+        </tr>
+      </table>
+      <br>
+    </form>
+  </div>
+
+  <div>
+    <h2>Security Agency Database</h2>
+  </div>
+  <div ng-controller="testCtrl">
+    <p>Search:<input type="text" ng-model="test"></p>
+    <form name="commonForm">
+      <table class="table">
+        <tr>
+          <th> Agency Name </th>
+          <th> Agency License </th>
+          <th> Phone </th>
+          <th> Recruitment Status </th>
+        </tr>
+        <tr ng-repeat="employee in userData3 | filter : test">
+          <td> {{employee.agencyName}}</td>
+          <td> {{employee.agencylicense}}</td>
+          <td> {{employee.phone}}</td>
+          <td> {{employee.recruits}}</td>
+        </tr>
+      </table>
+      <br>
+    </form>
+  </div>
+
+  <div>
+    <h2>CCTV Camera Database</h2>
+  </div>
+  <div ng-controller="testCtrl">
+    <p>Search:<input type="text" ng-model="test"></p>
+    <form name="commonForm">
+      <table class="table">
+        <tr>
+          <th>Camera ID </th>
+          <th>Camera Floor</th>
+          <th>Start Time</th>
+          <th>Stop Time</th>
+        </tr>
+        <tr ng-repeat="employee in userData4 | filter : test">
+          <td> {{employee.id}}</td>
+          <td> {{employee.floor}}</td>
+          <td> {{employee.starttime}}</td>
+          <td> {{employee.stoptime | uppercase}}</td>
+        </tr>
+      </table>
+      <br>
+    </form>
+  </div>
+
+  <div>
+    <h2>Admin Database</h2>
+  </div>
+  <div ng-controller="testCtrl">
+    <p>Search:<input type="text" ng-model="test"></p>
+    <form name="commonForm">
+      <table class="table">
+        <tr>
+          <th> Admin Name </th>
+          <th> Department </th>
+          <th> Allocated Budget</th>
+          <th> Spent Budget </th>
+          <th> Budget Remaining </th>
+          <th> Database Last Accessed </th>
+        </tr>
+        <tr ng-repeat="employee in userData5 | filter : test">
+          <td> {{employee.firstName}} {{employee.lastName}}</td>
+          <td> {{employee.dept}}</td>
+          <td> {{employee.budgetalloc | currency}}</td>
+          <td> {{employee.budgetspent | currency}}</td>
+          <td> {{employee.budgetrem   | currency}}</td>
+          <td> {{ today | date : "dd.MM.y" }}</td>
+        </tr>
+      </table>
+      <br>
+    </form>
+  </div>
+
 </body>
 
 </html>
