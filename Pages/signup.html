@@ -90,7 +90,7 @@
 <section>
 <h2>Employee Sign Up Page</h2>
 <br>
-<form onsubmit="return validate()" action="contactuspage.html" >
+<form onsubmit="return validate()" action="login.html" >
     <div>
         <label for="nameemp">Name</label>
         <input type="text" onkeypress="return (event.charCode > 64 && 
@@ -304,6 +304,7 @@ $(document).ready(function(){
            }
            else
            {
+             alert("Your details have been submitted successfully. Please wait for mall confirmation email if accepted!");
              return true;
            }
         }
