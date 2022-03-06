@@ -1,4 +1,4 @@
-# MallManagement_SecurityModule
+# WD-MallManagement-SecurityModule
 This will contain information related to Lab Programs related to Webstack Development
 Right Now, there are three HTML Pages
 - Home Page
